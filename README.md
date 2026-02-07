@@ -1,12 +1,7 @@
-# Monte Carlo Pricer for Asian Options 📈
+# Monte Carlo Pricer for Asian Options 
 
-A high-performance Python implementation of Monte Carlo simulation for pricing Asian options with advanced variance reduction techniques, achieving up to **73.8% variance reduction**.
 
-![Python](https://img.shields.io/badge/python-3.8+-blue.svg)
-![License](https://img.shields.io/badge/license-MIT-green.svg)
-![Status](https://img.shields.io/badge/status-active-success.svg)
-
-## 🎯 Overview
+##  Overview
 
 This project implements a Monte Carlo pricer for path-dependent Asian options under the Black-Scholes framework. The key innovation lies in comparing three variance reduction methods to optimize pricing accuracy and computational efficiency.
 
@@ -23,7 +18,7 @@ This project implements a Monte Carlo pricer for path-dependent Asian options un
   - Payoff correlation analysis between Asian and European options
   - Detailed variance reduction effectiveness metrics
 
-## 📊 Results
+##  Results
 
 ### Variance Reduction Performance
 
@@ -61,57 +56,8 @@ Variance  = 665.1806    (↓ vs anti: 73.8%)
 IC        = (97.01, 97.33)
 ```
 
-## 🚀 Quick Start
 
-### Installation
-
-```bash
-# Clone repository
-git clone https://github.com/YOUR_USERNAME/asian-option-pricer.git
-cd asian-option-pricer
-
-# Install dependencies
-pip install -r requirements.txt
-```
-
-### Basic Usage
-
-```python
-from src.monte_carlo_pricer import asian_option_pricer
-
-# Price an Asian call option on Apple stock
-result = asian_option_pricer(
-    S0=278.12,          # Current spot price
-    K=180,              # Strike price
-    r=0.03,             # Risk-free rate
-    q=0.005,            # Dividend yield
-    sigma=0.316,        # Volatility (estimated from historical data)
-    T=1,                # Maturity in years
-    n_sim=50000,        # Number of simulations
-    obs_freq="daily",   # Observation frequency
-    option_type="call"  # Call or put
-)
-
-# Display results
-print(f"Option Price (CV): ${result['Price CV']:.2f}")
-print(f"Variance Reduction: {(1 - result['Var CV']/result['Var Basic'])*100:.1f}%")
-print(f"95% Confidence Interval: [{result['IC CV'][0]:.2f}, {result['IC CV'][1]:.2f}]")
-```
-
-### Using Real Market Data
-
-```python
-from src.monte_carlo_pricer import load_asset_parameters, asian_option_pricer
-
-# Automatically fetch real market parameters
-S0, sigma, r, q, _ = load_asset_parameters("AAPL", period="1y")
-
-# Price the option
-result = asian_option_pricer(S0, K=180, r=r, q=q, sigma=sigma, T=1)
-print(f"Price: ${result['Price CV']:.2f}")
-```
-
-## 📈 Methodology
+##  Methodology
 
 ### Asian Options
 
@@ -161,33 +107,9 @@ def box_muller(n_sim, m_steps):
     return np.sqrt(-2 * np.log(U1)) * np.cos(2 * np.pi * U2)
 ```
 
-## 📁 Project Structure
 
-```
-asian-option-pricer/
-│
-├── README.md                      # This file
-├── requirements.txt               # Python dependencies
-├── LICENSE                        # MIT License
-│
-├── src/
-│   └── monte_carlo_pricer.py     # Main implementation
-│
-├── visualizations/
-│   ├── create_visualizations.py  # Generate all plots
-│   ├── monte_carlo_process.png   # Process overview
-│   ├── convergence.png           # Convergence analysis
-│   └── variance_comparison.png   # Method comparison
-│
-├── examples/
-│   ├── basic_usage.py            # Simple examples
-│   └── advanced_analysis.ipynb   # Jupyter notebook with detailed analysis
-│
-└── results/
-    └── benchmark_results.txt     # Performance metrics
-```
 
-## 🛠️ Technologies
+##  Technologies
 
 - **Python 3.8+**
 - **NumPy** - Vectorized numerical computations
@@ -196,7 +118,7 @@ asian-option-pricer/
 - **Matplotlib/Seaborn** - Publication-quality visualizations
 - **yfinance** - Real-time market data from Yahoo Finance
 
-## 📊 Visualizations
+##  Visualizations
 
 ### Convergence Analysis
 
@@ -210,7 +132,7 @@ Compares the three methods across different metrics:
 
 ![Variance Comparison](visualizations/variance_comparison_placeholder.png)
 
-## 🧪 Testing & Validation
+##  Testing & Validation
 
 ### Validation Against Black-Scholes
 
@@ -236,51 +158,15 @@ Strike | Maturity | Asian Price | European Price | Difference
 
 **Observation**: Asian options consistently priced lower than Europeans (expected behavior due to averaging effect).
 
-## 🎓 Academic Context
 
-This project was developed as part of quantitative finance coursework at **ECE Paris** (2024-2025), focusing on:
-
-- Stochastic calculus applications in derivatives pricing
-- Monte Carlo methods for path-dependent options
-- Variance reduction techniques in computational finance
-- Real-world data integration and validation
-
-## 📚 References
-
-- Hull, J. (2018). *Options, Futures, and Other Derivatives*
-- Glasserman, P. (2003). *Monte Carlo Methods in Financial Engineering*
-- Kemna, A., & Vorst, A. (1990). "A pricing method for options based on average asset values"
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## 📄 License
+##  License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 👤 Author
+##  Author
 
 **Thomas Nassar**
-- 🎓 ECE Paris - M1 Finance & Quantitative Engineering
-- 💼 [LinkedIn](https://www.linkedin.com/in/thomas-nassar-a9935a290)
-- 📧 thomas.nassar@edu.ece.fr
-- 🔗 Seeking 6-month Front Office / Quantitative internship (April 2026)
+-  ECE Paris - Finance & Quantitative Engineering
+-  [LinkedIn](https://www.linkedin.com/in/thomas-nassar-a9935a290)
+-  thomas.nassar@edu.ece.fr
 
-## 🌟 Acknowledgments
-
-- ECE Paris Finance & Quantitative Engineering program
-- Yahoo Finance for market data API
-
----
-
-⭐ **If you find this project useful, please consider giving it a star!**
-
-## 📝 Future Enhancements
-
-- [ ] Add GPU acceleration with CuPy for large-scale simulations
-- [ ] Implement additional variance reduction (importance sampling, stratified sampling)
-- [ ] Extend to geometric Asian options
-- [ ] Add Greeks calculation (Delta, Gamma, Vega)
-- [ ] Develop web interface for interactive pricing
-- [ ] Compare with other numerical methods (PDE, binomial trees)
